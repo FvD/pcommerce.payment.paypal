@@ -1,0 +1,36 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="pcommerce">
+    
+  <five:registerPackage package="." />
+      
+  <include package="pcommerce.core" />
+  <include package=".browser" />
+
+  <!-- Register the installation GenericSetup extension profile -->
+  <genericsetup:registerProfile
+      name="default"
+      title="pcommerce.payment.paypal"
+      directory="profiles/default"
+      description="Provides PayPal Payment for PCommerce"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      />
+
+  <genericsetup:importStep
+    name="pcommerce.payment.paypal.various"
+    title="PCommerce Paypal configuration"
+    description="Configures PCommerce Paypal properties"
+    handler=".setuphandlers.setupVarious">
+  </genericsetup:importStep>
+  
+  
+  <adapter
+      factory=".plugin.PaypalPayment"
+      provides="pcommerce.core.interfaces.IPaymentMethod"
+      name="pcommerce.payment.paypal"
+      />
+
+</configure>
