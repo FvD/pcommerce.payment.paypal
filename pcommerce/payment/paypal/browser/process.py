@@ -3,12 +3,16 @@ from xml.dom import minidom
 from Products.Five.browser import BrowserView
 
 from Products.CMFCore.utils import getToolByName
+import transaction
 
 from pcommerce.core.interfaces import IPaymentProcessor
-
+from pcommerce.core.interfaces import IOrderRegistry
 from time import time
 from urllib import urlencode
 from urllib2 import urlopen, Request
+
+import logging
+logger = logging.getLogger("Plone")
 
 class ProcessPaypal(BrowserView):
     """process Paypal payments
@@ -25,11 +29,11 @@ class ProcessPaypal(BrowserView):
  
         # Verify the data received with Paypal
         if not self.verify_ipn(data):
-            print "Error with paypal" 
+            logger.info("pcommerce.payment.paypal: Error with paypal verify")
             return "Error with paypal" 
         else:
             processor = IPaymentProcessor(self.context)
-            return processor.processOrder(data['item_number'], 'pcommerce.payment.paypal', lang)
+            return processor.processOrder(data['item_number1'], 'pcommerce.payment.paypal', lang)
 
     def verify_ipn(self,data):
         # prepares provided data set to inform PayPal we wish to validate the response
@@ -44,7 +48,6 @@ class ProcessPaypal(BrowserView):
         # reads the response back from PayPal
         response = urlopen(req)
         status = response.read()
- 
         # If not verified
         if not status == "VERIFIED":
             return False
@@ -56,6 +59,16 @@ class ProcessPaypal(BrowserView):
         # if not the correct currency
         if not data["mc_currency"] == "EUR":
             return False
+        # already processed?
+        order_registry = IOrderRegistry(self.context)
+        order = order_registry.getOrder(int(data['item_number1']))
+        try:
+            if order.txn_id == data['txn_id']:
+                logger.info("pcommerce.payment.paypal: Transaction already processed")
+                return False
+        except:
+            order.txn_id = data['txn_id'] 
+            transaction.commit() 
         # otherwise...
         return True
 
