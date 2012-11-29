@@ -33,38 +33,6 @@
                 <legend i18n:translate="">Paypal configuration</legend>
                 
                 <div class="field"
-                     tal:attributes="class python:'field'+(errors.has_key('paypal_receiver_email') and ' error' or '')">
-
-                    <label i18n:translate=""
-                           for="paypal_receiver_email">
-                        PayPal Receiver Email
-                    </label>
-
-                    <span class="fieldRequired"
-                          title="Required"
-                          i18n:domain="plone"
-                          i18n:attributes="title title_required;"
-                          i18n:translate="label_required">
-                        (Required)
-                    </span>
-
-                    <div class="formHelp"
-                         i18n:translate="">
-                        The paypal account-number (e.g. 99867-94913159)
-                    </div>
-
-                    <div tal:condition="python:errors.has_key('accountid')"
-                         tal:content="errors/title|nothing">
-                        The Error
-                    </div>
-
-                    <div class="widget">
-                        <input id="paypal_receiver_email" name="paypal_receiver_email" value="99867-94913159" type="text"
-                               tal:attributes="value view/values/paypal_receiver_email|request/paypal_receiver_email"/>
-                    </div>
-                </div>
-                
-                <div class="field"
                      tal:attributes="class python:'field'+(errors.has_key('test') and ' error' or '')">
 
                     <label i18n:translate=""
@@ -85,29 +53,133 @@
                 </div>
                 
                 <div class="field"
-                     tal:attributes="class python:'field'+(errors.has_key('password') and ' error' or '')">
+                     tal:attributes="class python:'field'+(errors.has_key('api_username') and ' error' or '')">
 
                     <label i18n:translate=""
-                           for="password">
-                        Account Password
+                           for="api_username">
+                        API Username
                     </label>
+
+                    <span class="fieldRequired"
+                          title="Required"
+                          i18n:domain="plone"
+                          i18n:attributes="title title_required;"
+                          i18n:translate="label_required">
+                        (Required)
+                    </span>
 
                     <div class="formHelp"
                          i18n:translate="">
-                        The password for the account (only required for test accounts)
+                        The paypal API Username 
                     </div>
 
-                    <div tal:condition="python:errors.has_key('password')"
+                    <div tal:condition="python:errors.has_key('api_username')"
                          tal:content="errors/title|nothing">
                         The Error
                     </div>
 
                     <div class="widget">
-                        <input id="password" name="password" value="" type="text"
-                               tal:attributes="value view/values/password|request/password"/>
+                        <input id="api_username" name="api_username" value="" type="text"
+                               tal:attributes="value view/values/api_username|request/api_username"/>
                     </div>
                 </div>
-                
+                 
+                <div class="field"
+                     tal:attributes="class python:'field'+(errors.has_key('api_password') and ' error' or '')">
+
+                    <label i18n:translate=""
+                           for="api_password">
+                        API Password
+                    </label>
+
+                    <div class="formHelp"
+                         i18n:translate="">
+                        The API password for the account
+                    </div>
+
+                    <div tal:condition="python:errors.has_key('api_password')"
+                         tal:content="errors/title|nothing">
+                        The Error
+                    </div>
+
+                    <div class="widget">
+                        <input id="api_password" name="password" value="" type="text"
+                               tal:attributes="value view/values/api_password|request/api_password"/>
+                    </div>
+                </div>
+ 
+                <div class="field"
+                     tal:attributes="class python:'field'+(errors.has_key('api_signature') and ' error' or '')">
+
+                    <label i18n:translate=""
+                           for="api_signature">
+                        API signature
+                    </label>
+
+                    <div class="formHelp"
+                         i18n:translate="">
+                        The signature for the account
+                    </div>
+
+                    <div tal:condition="python:errors.has_key('api_signature')"
+                         tal:content="errors/title|nothing">
+                        The Error
+                    </div>
+
+                    <div class="widget">
+                        <input id="api_signature" name="password" value="" type="text"
+                               tal:attributes="value view/values/api_signature|request/api_signature"/>
+                    </div>
+                </div>
+ 
+                <div class="field"
+                    tal:attributes="class python:'field'+(errors.has_key('ipn_notify_url') and ' error' or '')">
+
+                    <label i18n:translate=""
+                           for="ipn_notify_url">
+                        API signature
+                    </label>
+
+                    <div class="formHelp"
+                         i18n:translate="">
+                        URL for IPN. (Only if needed)
+                    </div>
+
+                    <div tal:condition="python:errors.has_key('ipn_notify_url')"
+                         tal:content="errors/title|nothing">
+                        The Error
+                    </div>
+
+                    <div class="widget">
+                        <input id="ipn_notify_url" name="password" value="" type="text"
+                               tal:attributes="value view/values/ipn_notify_url|request/ipn_notify_url"/>
+                    </div>
+                </div>
+  
+                <div class="field"
+                    tal:attributes="class python:'field'+(errors.has_key('receiver_id') and ' error' or '')">
+
+                    <label i18n:translate=""
+                           for="receiver_id">
+                        Receiver ID
+                    </label>
+
+                    <div class="formHelp"
+                         i18n:translate="">
+                        Receiver ID 
+                    </div>
+
+                    <div tal:condition="python:errors.has_key('receiver_id')"
+                         tal:content="errors/title|nothing">
+                        The Error
+                    </div>
+
+                    <div class="widget">
+                        <input id="receiver_id" name="password" value="" type="text"
+                               tal:attributes="value view/values/receiver_id|request/receiver_id"/>
+                    </div>
+                </div>
+             
             </fieldset>
 
             <div id="actionsView" class="formControls">
@@ -124,4 +196,3 @@
 
 </body>
 </html>
-
