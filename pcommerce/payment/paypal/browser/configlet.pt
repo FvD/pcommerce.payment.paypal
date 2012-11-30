@@ -35,22 +35,28 @@
                 <div class="field"
                      tal:attributes="class python:'field'+(errors.has_key('test') and ' error' or '')">
 
+                    <div class="widget"
+                         tal:define="value view/values/test|request/test">
+                        <input id="test" name="test:boolean" value="1" type="checkbox"
+                               tal:attributes="checked python: value and 'checked' or ''"/>
+                    </div>
+ 
                     <label i18n:translate=""
                            for="test">
-                        Test Account
+                        Activates test Account
                     </label>
+
+                    <div class="formHelp"
+                         i18n:translate="">
+                        Sandbox accout at https://developer.paypal.com 
+                    </div>
 
                     <div tal:condition="python:errors.has_key('test')"
                          tal:content="errors/title|nothing">
                         The Error
                     </div>
 
-                    <div class="widget"
-                         tal:define="value view/values/test|request/test">
-                        <input id="test" name="test:boolean" value="1" type="checkbox"
-                               tal:attributes="checked python: value and 'checked' or ''"/>
-                    </div>
-                </div>
+               </div>
                 
                 <div class="field"
                      tal:attributes="class python:'field'+(errors.has_key('api_username') and ' error' or '')">
@@ -92,6 +98,15 @@
                         API Password
                     </label>
 
+                    <span class="fieldRequired"
+                          title="Required"
+                          i18n:domain="plone"
+                          i18n:attributes="title title_required;"
+                          i18n:translate="label_required">
+                        (Required)
+                    </span>
+
+
                     <div class="formHelp"
                          i18n:translate="">
                         The API password for the account
@@ -103,7 +118,7 @@
                     </div>
 
                     <div class="widget">
-                        <input id="api_password" name="password" value="" type="text"
+                        <input id="api_password" name="api_password" value="" type="text"
                                tal:attributes="value view/values/api_password|request/api_password"/>
                     </div>
                 </div>
@@ -116,6 +131,14 @@
                         API signature
                     </label>
 
+                    <span class="fieldRequired"
+                          title="Required"
+                          i18n:domain="plone"
+                          i18n:attributes="title title_required;"
+                          i18n:translate="label_required">
+                        (Required)
+                    </span>
+
                     <div class="formHelp"
                          i18n:translate="">
                         The signature for the account
@@ -127,35 +150,11 @@
                     </div>
 
                     <div class="widget">
-                        <input id="api_signature" name="password" value="" type="text"
+                        <input id="api_signature" name="api_signature" value="" type="text"
                                tal:attributes="value view/values/api_signature|request/api_signature"/>
                     </div>
                 </div>
  
-                <div class="field"
-                    tal:attributes="class python:'field'+(errors.has_key('ipn_notify_url') and ' error' or '')">
-
-                    <label i18n:translate=""
-                           for="ipn_notify_url">
-                        API signature
-                    </label>
-
-                    <div class="formHelp"
-                         i18n:translate="">
-                        URL for IPN. (Only if needed)
-                    </div>
-
-                    <div tal:condition="python:errors.has_key('ipn_notify_url')"
-                         tal:content="errors/title|nothing">
-                        The Error
-                    </div>
-
-                    <div class="widget">
-                        <input id="ipn_notify_url" name="password" value="" type="text"
-                               tal:attributes="value view/values/ipn_notify_url|request/ipn_notify_url"/>
-                    </div>
-                </div>
-  
                 <div class="field"
                     tal:attributes="class python:'field'+(errors.has_key('receiver_id') and ' error' or '')">
 
@@ -175,8 +174,32 @@
                     </div>
 
                     <div class="widget">
-                        <input id="receiver_id" name="password" value="" type="text"
+                        <input id="receiver_id" name="receiver_id" value="" type="text"
                                tal:attributes="value view/values/receiver_id|request/receiver_id"/>
+                    </div>
+                </div>
+ 
+                <div class="field"
+                    tal:attributes="class python:'field'+(errors.has_key('ipn_notify_url') and ' error' or '')">
+
+                    <label i18n:translate=""
+                           for="ipn_notify_url">
+                        IPN URL
+                    </label>
+
+                    <div class="formHelp"
+                         i18n:translate="">
+                        URL for IPN. (Only if needed)
+                    </div>
+
+                    <div tal:condition="python:errors.has_key('ipn_notify_url')"
+                         tal:content="errors/title|nothing">
+                        The Error
+                    </div>
+
+                    <div class="widget">
+                        <input id="ipn_notify_url" name="ipn_notify_url" value="" type="text"
+                               tal:attributes="value view/values/ipn_notify_url|request/ipn_notify_url"/>
                     </div>
                 </div>
              
