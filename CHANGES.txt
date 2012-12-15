@@ -1,8 +1,8 @@
 Changelog
 =========
 
-k (unreleased)
---------------
+0.3.4 (2012-12-15)
+------------------
 
 - Nothing changed yet.
 
