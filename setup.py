@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.3.3'
+version = 'k.dev0'
 
 setup(name='pcommerce.payment.paypal',
       version=version,
