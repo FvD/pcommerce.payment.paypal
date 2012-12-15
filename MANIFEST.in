@@ -1,0 +1,3 @@
+recursive-include pcommerce *
+recursive-include docs *
+global-exclude *pyc
