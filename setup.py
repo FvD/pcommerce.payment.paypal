@@ -6,7 +6,7 @@ version = '0.3'
 setup(name='pcommerce.payment.paypal',
       version=version,
       description="A paypal payment method for PCommerce",
-      long_description=open("README.rst").read() + "\n" +
+      long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
