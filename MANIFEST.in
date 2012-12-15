@@ -1,3 +1,2 @@
-recursive-include *
-include *.txt
-global-exclude *pyc
+include *
+global-exclude *.pyc
